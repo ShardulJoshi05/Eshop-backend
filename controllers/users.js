@@ -7,18 +7,18 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  // validate a request,if its invalid return 400 otherwise create a new user and save to db
+  // validate a requests,if its not valid return 400 otherwise create a new user and save to db
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  // validate if a user is already registered or not
-  let user = await User.findOne({ email: req.body.email }); 
+  // validation if user is not already registered
+  let user = await User.findOne({ email: req.body.email }); // looking up by the prop. i.e. email
   if (user)
     return res
       .status(400)
       .send("Try any other email, this email is already registered!");
 
-  // save it in DB
+  // At this point we have a valid user object, hence save this into db
   user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -27,8 +27,8 @@ router.post("/", async (req, res) => {
     password: req.body.password,
   });
 
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt); 
+  const salt = await bcrypt.genSalt(10); // here
+  user.password = await bcrypt.hash(user.password, salt); // reset it at lhs
 
   await user.save();
 

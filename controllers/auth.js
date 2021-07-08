@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
   res.send({email:user.email, name: user.firstName+" "+user.lastName, isAuthenticated:true});
 });
 
-// Validation of email and password
+// Below we are confirming that email and password is sent by user in request
 function validate(user) {
   const schema = {
     email: Joi.string().min(5).max(255).required().email(),

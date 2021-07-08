@@ -53,6 +53,23 @@ function validateProductGet(product) {
 exports.Product = Product; 
 exports.validateProduct = validateProduct;
 exports.validateProductGet = validateProductGet;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.productSchema = productSchema;
 exports.Product = Product;
 exports.validateProduct = validateProduct;
